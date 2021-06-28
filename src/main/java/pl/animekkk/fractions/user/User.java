@@ -3,6 +3,7 @@ package pl.animekkk.fractions.user;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.entity.Player;
+import pl.animekkk.fractions.fraction.Fraction;
 
 import java.util.UUID;
 
@@ -17,6 +18,10 @@ public class User {
     @Getter
     @Setter
     private Player player;
+
+    @Getter
+    @Setter
+    private Fraction fraction;
 
     public User(UUID uuid, String name) {
         this.uuid = uuid;
