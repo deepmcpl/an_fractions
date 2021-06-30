@@ -8,7 +8,6 @@ public class LocationUtil {
 
     public static int fractionDistance(Location location) {
         double distance = 9999;
-        //TODO When create fraction set fraction location to 0 because of this
         location.setY(0);
         for(Fraction fraction : FractionManager.getFractions()) {
             double fractionDistance = fraction.getCuboid().getLocation().distanceSquared(location);

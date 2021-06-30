@@ -22,7 +22,6 @@ public class ExtendCommand extends Command {
         if(fraction == null) return ChatUtils.sendMessage(player, "&7You are not owner of any faction.");
         if(fraction.getOwner() != user.getUuid()) return ChatUtils.sendMessage(player, "&7You are not owner of this faction.");
         //TODO Check items
-        //TODO Create expire task & Set every user of this fraction to null
         fraction.setExpireDate(fraction.getExpireDate() + 259200000L); //3 Days
         return ChatUtils.sendMessage(player, "&7You have extended time of your fraction for another &33 days&7.");
     }

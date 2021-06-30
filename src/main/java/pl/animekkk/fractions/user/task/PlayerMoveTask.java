@@ -20,13 +20,13 @@ public class PlayerMoveTask implements Runnable {
             User user = UserManager.getUser(player.getUniqueId());
             Fraction fraction = LocationUtil.getCurrentFraction(player.getLocation());
             if(fraction != null) {
-                if(!fraction.getFractionSetting().hasSetting(FractionSetting.ENTER_CUBOID) && !fraction.isMember(user.getUuid())) {
+                if(!fraction.getFractionSetting().hasSetting(FractionSetting.ENTER_CUBOID)
+                        && !fraction.isMember(user.getUuid()) && user.getLastSafeLocation() != null) {
                     player.teleport(user.getLastSafeLocation());
                     ChatUtils.sendActionBar(player, "&7You can't enter this fraction cuboid. (&3" + fraction.getTag() + "&7)");
                 } else {
                     ChatUtils.sendActionBar(player, "&7You are in &3" + fraction.getTag() + " &7fraction cuboid.");
                     seenOnCuboid.add(player.getUniqueId());
-                    //TODO Allies
                 }
             } else {
                 user.setLastSafeLocation(player.getLocation());
