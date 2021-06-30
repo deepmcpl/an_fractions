@@ -3,8 +3,7 @@ package pl.animekkk.fractions.fraction;
 import lombok.Getter;
 import lombok.Setter;
 import pl.animekkk.fractions.fraction.cuboid.Cuboid;
-import pl.animekkk.fractions.fraction.settings.FractionSettings;
-import pl.animekkk.fractions.user.User;
+import pl.animekkk.fractions.fraction.setting.FractionSettings;
 
 import java.util.*;
 
@@ -17,7 +16,8 @@ public class Fraction {
     private final String name;
 
     @Getter
-    private final UUID owner;
+    @Setter
+    private UUID owner;
 
     @Getter
     private final FractionSettings fractionSetting;

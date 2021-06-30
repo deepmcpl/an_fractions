@@ -37,8 +37,10 @@ public class CreateCommand extends Command {
         int distance = LocationUtil.fractionDistance(player.getLocation());
         if(distance <= 80) return ChatUtils.sendMessage(player, "&7You are too close to other fraction. &3(" + (80 - distance) + " blocks)");
         //TODO Check items
-        Fraction createdFraction = FractionManager.addFraction(new Fraction(player.getUniqueId(), tag.toUpperCase(), name, new Cuboid(location, 50)));
+        Fraction createdFraction =
+                FractionManager.addFraction(new Fraction(player.getUniqueId(), tag.toUpperCase(), name, new Cuboid(location, 50, player.getLocation())));
         createdFraction.addMember(player.getUniqueId());
+        createdFraction.setExpireDate(System.currentTimeMillis() + 259200000L); //3 days
         user.setFraction(createdFraction);
         return ChatUtils.sendMessage(player, "&7You have created &3" + createdFraction.getTag() + "&7 - &3" + createdFraction.getName() + " &7fraction.");
     }

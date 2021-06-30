@@ -37,7 +37,7 @@ public class InviteCommand extends Command {
             ChatUtils.sendMessage(toAdd.getPlayer(), "&7You have been invited to &3" + fraction.getTag() + " &7fraction.\n" +
                     "&7To join type: &3/join " + fraction.getTag() + "&7.");
         }
-        return ChatUtils.sendMessage(player, "&3" + toAdd.getName() + " &7have been invited to your faction.\n" +
+        return ChatUtils.sendMessage(player, "&3" + toAdd.getName() + " &7has been invited to your faction.\n" +
                 "To cancel this invite type: &3/invite " + toAdd.getName());
     }
 }

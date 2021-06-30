@@ -4,16 +4,19 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.animekkk.fractions.commands.CommandManager;
-import pl.animekkk.fractions.fraction.commands.CreateCommand;
-import pl.animekkk.fractions.fraction.commands.FractionsCommand;
+import pl.animekkk.fractions.fraction.commands.*;
 import pl.animekkk.fractions.user.listener.PlayerJoinListener;
 import pl.animekkk.fractions.user.listener.PlayerQuitListener;
-import pl.animekkk.fractions.user.tasks.CuboidInfoTask;
+import pl.animekkk.fractions.user.task.PlayerMoveTask;
 
 public class Fractions extends JavaPlugin {
 
+    private static Fractions instance;
+
     @Override
     public void onEnable() {
+        instance = this;
+
         registerListeners();
         registerCommands();
         registerTasks();
@@ -26,11 +29,26 @@ public class Fractions extends JavaPlugin {
     }
 
     private void registerCommands() {
-        CommandManager.register(new FractionsCommand());
+        CommandManager.register(new AllyCommand());
+        CommandManager.register(new BaseCommand());
         CommandManager.register(new CreateCommand());
+        CommandManager.register(new ExtendCommand());
+        CommandManager.register(new FractionsCommand());
+        CommandManager.register(new InviteCommand());
+        CommandManager.register(new JoinCommand());
+        CommandManager.register(new KickCommand());
+        CommandManager.register(new LeaveCommand());
+        CommandManager.register(new OwnerCommand());
+        CommandManager.register(new SetBaseCommand());
+        CommandManager.register(new UnAllyCommand());
     }
 
     public void registerTasks() {
-        Bukkit.getScheduler().runTaskTimerAsynchronously(this, new CuboidInfoTask(), 20L, 20L);
+        Bukkit.getScheduler().runTaskTimerAsynchronously(this, new PlayerMoveTask(), 10L, 10L);
     }
+
+    public static Fractions getInstance() {
+        return instance;
+    }
+
 }

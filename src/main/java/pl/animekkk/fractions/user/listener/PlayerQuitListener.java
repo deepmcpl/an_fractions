@@ -6,7 +6,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 import pl.animekkk.fractions.user.User;
 import pl.animekkk.fractions.user.UserManager;
-import pl.animekkk.fractions.user.tasks.CuboidInfoTask;
+import pl.animekkk.fractions.user.task.PlayerMoveTask;
 
 public class PlayerQuitListener implements Listener {
 
@@ -17,7 +17,7 @@ public class PlayerQuitListener implements Listener {
         if(user != null) {
             user.setPlayer(null);
         }
-        CuboidInfoTask.seenOnCuboid.remove(player.getUniqueId());
+        PlayerMoveTask.seenOnCuboid.remove(player.getUniqueId());
     }
 
 }

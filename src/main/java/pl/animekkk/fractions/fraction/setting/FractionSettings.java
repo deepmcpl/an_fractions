@@ -1,4 +1,4 @@
-package pl.animekkk.fractions.fraction.settings;
+package pl.animekkk.fractions.fraction.setting;
 
 import lombok.Getter;
 

@@ -13,16 +13,27 @@ public class Cuboid {
     @Setter
     private int size;
 
-    private int maxX, minX, maxZ, minZ;
+    @Getter
+    @Setter
+    private Location base;
 
-    public Cuboid(Location location, int size) {
+    private final int maxX, minX, maxZ, minZ;
+
+    public Cuboid(Location location, int size, Location base) {
         this.location = location;
         this.size = size;
+        this.base = base;
 
-        this.maxX = location.getBlockX() + 25;
-        this.minX = location.getBlockX() - 25;
-        this.maxZ = location.getBlockZ() + 25;
-        this.minZ = location.getBlockZ() - 25;
+        int half = size / 2;
+
+        this.maxX = location.getBlockX() + half;
+        this.minX = location.getBlockX() - half;
+        this.maxZ = location.getBlockZ() + half;
+        this.minZ = location.getBlockZ() - half;
+    }
+
+    public Cuboid(Location location, int size) {
+        this(location, size, location);
     }
 
     public boolean isCuboid(Location location)

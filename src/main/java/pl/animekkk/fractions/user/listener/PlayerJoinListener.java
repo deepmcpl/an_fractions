@@ -17,6 +17,7 @@ public class PlayerJoinListener implements Listener {
             user = UserManager.addUser(new User(player.getUniqueId(), player.getName()));
         }
         user.setPlayer(player);
+        //TODO Check fraction expire time
     }
 
 }

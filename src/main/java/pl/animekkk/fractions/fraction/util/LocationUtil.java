@@ -17,4 +17,11 @@ public class LocationUtil {
         return (int) distance;
     }
 
+    public static Fraction getCurrentFraction(Location location) {
+        for(Fraction fraction : FractionManager.getFractions()) {
+            if(fraction.getCuboid().isCuboid(location)) return fraction;
+        }
+        return null;
+    }
+
 }

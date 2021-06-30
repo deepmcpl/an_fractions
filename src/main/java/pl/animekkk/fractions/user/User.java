@@ -2,6 +2,7 @@ package pl.animekkk.fractions.user;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import pl.animekkk.fractions.fraction.Fraction;
 
@@ -22,6 +23,10 @@ public class User {
     @Getter
     @Setter
     private Fraction fraction;
+
+    @Getter
+    @Setter
+    private Location lastSafeLocation;
 
     public User(UUID uuid, String name) {
         this.uuid = uuid;
