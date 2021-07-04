@@ -3,11 +3,13 @@ package pl.animekkk.fractions.fraction;
 import lombok.Getter;
 import lombok.Setter;
 import pl.animekkk.fractions.fraction.cuboid.Cuboid;
+import pl.animekkk.fractions.fraction.relation.RelationType;
 import pl.animekkk.fractions.fraction.setting.FractionSettings;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Fraction {
+public class Fraction implements Serializable {
 
     @Getter
     private final String tag;
@@ -38,6 +40,9 @@ public class Fraction {
     @Getter
     private final Set<String> allies = new HashSet<>();
 
+    @Getter
+    private final Set<String> alliesInvites = new HashSet<>();
+
     public Fraction(UUID owner, String tag, String name, FractionSettings fractionSetting, Cuboid cuboid) {
         this.owner = owner;
         this.tag = tag;
@@ -47,7 +52,7 @@ public class Fraction {
     }
 
     public Fraction(UUID uuid, String tag, String name, Cuboid cuboid) {
-        this(uuid, tag, name, new FractionSettings(), cuboid);
+        this(uuid, tag, name, new FractionSettings(""), cuboid);
     }
 
     public void addMember(UUID uuid) {
@@ -84,6 +89,24 @@ public class Fraction {
 
     public boolean isInvited(UUID uuid) {
         return this.invites.contains(uuid);
+    }
+
+    public void addAllyInvite(String tag) {
+        this.alliesInvites.add(tag);
+    }
+
+    public void removeAllyInvite(String tag) {
+        this.alliesInvites.remove(tag);
+    }
+
+    public boolean isAllyInvited(String tag) {
+        return this.alliesInvites.contains(tag);
+    }
+
+    public RelationType getRelation(Fraction fraction) {
+        if(fraction.equals(this)) return RelationType.TEAM;
+        else if(fraction.isAlly(this.getTag())) return RelationType.ALLY;
+        else return RelationType.ENEMY;
     }
 
 }

@@ -2,7 +2,7 @@ package pl.animekkk.fractions.fraction.commands;
 
 import org.bukkit.command.CommandSender;
 import pl.animekkk.fractions.commands.Command;
-import pl.animekkk.fractions.user.util.ChatUtils;
+import pl.animekkk.fractions.user.util.ChatUtil;
 
 public class FractionsCommand extends Command {
 
@@ -11,7 +11,7 @@ public class FractionsCommand extends Command {
     }
 
     public boolean onExecute(CommandSender commandSender, String[] args) {
-        return ChatUtils.sendMessage(commandSender, "&7Available commands:\n" +
+        return ChatUtil.sendMessage(commandSender, "&e[Fractions command]\n" +
                 "&3/settings &8- &7Fraction settings.\n" +
                 "&3/create <tag> <name> &8- &7Create fraction.\n" +
                 "&3/invite <player> &8- &7Invite player to your fraction.\n" +
@@ -24,6 +24,6 @@ public class FractionsCommand extends Command {
                 "&3/ally <tag> &8- &7Make ally with other fraction.\n" +
                 "&3/unally <tag> &8- &7Remove other fraction from your allies.\n" +
                 "&3/leave &8- &7Leave fraction\n" +
-                "&3/highlight &8- &7Enable/disable highlighting members of your fraction.");
+                "&e[Fractions command]");
     }
 }

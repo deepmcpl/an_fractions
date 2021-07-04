@@ -6,9 +6,10 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import pl.animekkk.fractions.fraction.Fraction;
 
+import java.io.Serializable;
 import java.util.UUID;
 
-public class User {
+public class User implements Serializable {
 
     @Getter
     private final UUID uuid;
@@ -34,7 +35,7 @@ public class User {
     }
 
     public boolean isOnline() {
-        return this.player == null;
+        return this.player != null;
     }
 
 }

@@ -1,5 +1,6 @@
 package pl.animekkk.fractions.user;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.UUID;
 
@@ -25,6 +26,10 @@ public class UserManager {
             if(user.getName().equalsIgnoreCase(name)) return user;
         }
         return null;
+    }
+
+    public static Collection<User> getUsers() {
+        return users.values();
     }
 
 }

@@ -14,6 +14,7 @@ public class PlayerBucketEmptyListener implements Listener {
     @EventHandler(ignoreCancelled = true)
     public void onPlace(PlayerBucketEmptyEvent event) {
         Player player = event.getPlayer();
+        if(player.hasPermission("fractions.cuboidbypass")) return;
         User user = UserManager.getUser(player.getUniqueId());
         Fraction placedFraction = LocationUtil.getCurrentFraction(event.getBlock().getLocation());
         if(placedFraction == null) return;

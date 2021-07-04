@@ -4,13 +4,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitTask;
 import pl.animekkk.fractions.Fractions;
 import pl.animekkk.fractions.commands.Command;
 import pl.animekkk.fractions.fraction.Fraction;
 import pl.animekkk.fractions.user.User;
 import pl.animekkk.fractions.user.UserManager;
-import pl.animekkk.fractions.user.util.ChatUtils;
+import pl.animekkk.fractions.user.util.ChatUtil;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,12 +28,12 @@ public class BaseCommand extends Command {
         Player player = (Player) commandSender;
         User user = UserManager.getUser(player.getUniqueId());
         Fraction fraction = user.getFraction();
-        if(fraction == null) return ChatUtils.sendMessage(player, "&7You don't belong to any fraction.");
-        if(teleporting.contains(user.getUuid())) return ChatUtils.sendMessage(player, "&7You are already trying to teleport.");
+        if(fraction == null) return ChatUtil.sendMessage(player, "&7You don't belong to any fraction.");
+        if(teleporting.contains(user.getUuid())) return ChatUtil.sendMessage(player, "&7You are already trying to teleport.");
         Location location = fraction.getCuboid().getBase();
         createTeleportTask(player, location, player.getLocation(), 5);
         teleporting.add(user.getUuid());
-        return ChatUtils.sendMessage(player, "&7You will be teleported in &35 seconds&7.");
+        return ChatUtil.sendMessage(player, "&7You will be teleported in &35 seconds&7.");
     }
 
     public void createTeleportTask(Player player, Location location, Location firstLocation, int seconds) {
@@ -45,18 +44,18 @@ public class BaseCommand extends Command {
             }
             if(seconds < 1) {
                 Bukkit.getScheduler().runTask(Fractions.getInstance(), () -> {
-                    ChatUtils.sendMessage(player, "&7You have been teleported to your fraction base.");
+                    ChatUtil.sendMessage(player, "&7You have been teleported to your fraction base.");
                     player.teleport(location);
                     teleporting.remove(player.getUniqueId());
                 });
                 return;
             }
             if(player.getLocation().getBlockX() != firstLocation.getBlockX() || player.getLocation().getBlockZ() != firstLocation.getBlockZ()) {
-                ChatUtils.sendMessage(player, "&7You have moved. Teleportation canceled.");
+                ChatUtil.sendMessage(player, "&7You have moved. Teleportation canceled.");
                 teleporting.remove(player.getUniqueId());
                 return;
             }
-            ChatUtils.sendMessage(player, "&7You will be teleported in: &3" + seconds + "s");
+            ChatUtil.sendMessage(player, "&7You will be teleported in: &3" + seconds + "s");
             createTeleportTask(player, location, firstLocation, seconds-1);
         }, 20L);
     }
