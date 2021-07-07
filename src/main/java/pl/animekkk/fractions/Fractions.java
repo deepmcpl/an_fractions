@@ -33,6 +33,9 @@ public class Fractions extends JavaPlugin {
     public void onEnable() {
         instance = this;
 
+        File file = new File(getDataFolder().getAbsolutePath());
+        if(!file.exists()) file.mkdirs();
+
         loadFractions();
         loadUsers();
 
