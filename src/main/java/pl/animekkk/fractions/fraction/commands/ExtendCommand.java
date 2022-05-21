@@ -13,7 +13,7 @@ import pl.animekkk.fractions.user.util.ChatUtil;
 public class ExtendCommand extends Command {
 
     public ExtendCommand() {
-        super("extend", "", "/extend", new String[0], "");
+        super("przedluz", "", "/przedluz", new String[0], "");
     }
 
     @Override
@@ -21,12 +21,12 @@ public class ExtendCommand extends Command {
         Player player = (Player) commandSender;
         User user = UserManager.getUser(player.getUniqueId());
         Fraction fraction = user.getFraction();
-        if(fraction == null) return ChatUtil.sendMessage(player, "&7You are not owner of any faction.");
-        if(!fraction.getOwner().equals(user.getUuid())) return ChatUtil.sendMessage(player, "&7You are not owner of this faction.");
+        if(fraction == null) return ChatUtil.sendMessage(player, "&7Nie należysz do żadnej frakcji.");
+        if(!fraction.getOwner().equals(user.getUuid())) return ChatUtil.sendMessage(player, "&7Nie jesteś właścicielem tej frakcji.");
         if(!player.getInventory().containsAtLeast(new ItemStack(Material.DIAMOND), 12))
-            return ChatUtil.sendMessage(player, "&7You have to have at least &312 diamonds &7to extend time of your fraction.");
+            return ChatUtil.sendMessage(player, "&7Musisz mieć przynajmniej &312 diamentów&7, aby przedłużyć ważność swojej frakcji.");
         player.getInventory().removeItem(new ItemStack(Material.DIAMOND, 12));
         fraction.setExpireDate(fraction.getExpireDate() + 259200000L); //3 Days
-        return ChatUtil.sendMessage(player, "&7You have extended time of your fraction for another &33 days&7.");
+        return ChatUtil.sendMessage(player, "&7Przedłużyłeś ważność swojej frakcji na kolejne &33 dni&7.");
     }
 }

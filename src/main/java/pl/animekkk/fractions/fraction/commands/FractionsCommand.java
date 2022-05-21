@@ -1,29 +1,30 @@
 package pl.animekkk.fractions.fraction.commands;
 
 import org.bukkit.command.CommandSender;
+import pl.animekkk.fractions.Fractions;
 import pl.animekkk.fractions.commands.Command;
 import pl.animekkk.fractions.user.util.ChatUtil;
 
 public class FractionsCommand extends Command {
 
     public FractionsCommand() {
-        super("fractions", "", "/fractions", new String[0], "");
+        super("frakcje", "", "/frakcje", new String[0], "");
     }
 
     public boolean onExecute(CommandSender commandSender, String[] args) {
-        return ChatUtil.sendMessage(commandSender, "&e[Fractions command]\n" +
-                "&3/settings &8- &7Fraction settings.\n" +
-                "&3/create <tag> <name> &8- &7Create fraction.\n" +
-                "&3/invite <player> &8- &7Invite player to your fraction.\n" +
-                "&3/kick <player> &8- &7Kick player from your fraction.\n" +
-                "&3/join <tag> &8- &7Join fraction.\n" +
-                "&3/base &8- &7Teleport to your fraction base.\n" +
-                "&3/setbase &8- &7Set base of your fraction.\n" +
-                "&3/extend &8- &7Extend the time length of your fraction.\n" +
-                "&3/owner <player> &8- &7Give owner to another player.\n" +
-                "&3/ally <tag> &8- &7Make ally with other fraction.\n" +
-                "&3/unally <tag> &8- &7Remove other fraction from your allies.\n" +
-                "&3/leave &8- &7Leave fraction\n" +
-                "&e[Fractions command]");
+        return ChatUtil.sendMessage(commandSender,
+                (Fractions.getFractionsConfig().getSettingsEnabled() ? "&3/settings &8- &7Fraction settings.\n" : "") +
+                "&3/stworz <tag> <nazwa> &8- &7Tworzenie frakcji.\n" +
+                "&3/zapros <nazwa> &8- &7Zapraszanie osoby do frakcji.\n" +
+                "&3/wyrzuc <nazwa> &8- &7Wyrzucanie osoby z frakcji.\n" +
+                "&3/dolacz <tag> &8- &7Dołączanie do frakcji.\n" +
+                "&3/baza &8- &7Teleportowanie do bazy frakcji.\n" +
+                "&3/ustawbaze &8- &7Ustawianie bazy frakcji.\n" +
+                "&3/przedluz &8- &7Przedłużanie ważnosci frakcji.\n" +
+                "&3/lider <nazwa> &8- &7Przekazywanie lidera frakcji.\n" +
+                "&3/sojusz <tag> &8- &7Zapraszanie do sojuszu.\n" +
+                "&3/zerwijsojusz <tag> &8- &7Zrywanie sojuszu.\n" +
+                "&3/opusc &8- &7Opuszczanie frakcji.\n" +
+                "&7Aby usunać frakcję należy użyć komendy &3/opusc&7.");
     }
 }

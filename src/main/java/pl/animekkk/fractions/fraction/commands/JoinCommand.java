@@ -13,7 +13,7 @@ import pl.animekkk.fractions.user.util.ChatUtil;
 public class JoinCommand extends Command {
 
     public JoinCommand() {
-        super("join", "", "/join <tag>", new String[0], "");
+        super("dolacz", "", "/dolacz <tag>", new String[0], "");
     }
 
     @Override
@@ -21,15 +21,15 @@ public class JoinCommand extends Command {
         Player player = (Player) commandSender;
         User user = UserManager.getUser(player.getUniqueId());
         Fraction fraction = user.getFraction();
-        if(fraction != null) return ChatUtil.sendMessage(player, "&7You already belong to &3" + fraction.getTag() + " &7fraction.");
-        if(args.length != 1) return ChatUtil.sendMessage(player, "&7Wrong usage. (&3/join <tag>&7)");
+        if(fraction != null) return ChatUtil.sendMessage(player, "&7Należysz już do &3" + fraction.getTag() + "&7.");
+        if(args.length != 1) return ChatUtil.sendMessage(player, "&7Złe użycie. (&3/dolacz <tag>&7)");
         Fraction newFraction = FractionManager.getFraction(args[0]);
-        if(newFraction == null) return ChatUtil.sendMessage(player, "&7This fraction does not exist.");
-        if(!newFraction.getInvites().contains(user.getUuid())) return ChatUtil.sendMessage(player, "&7You have not been invited to this fraction.");
+        if(newFraction == null) return ChatUtil.sendMessage(player, "&7Ta frakcja nie istnieje.");
+        if(!newFraction.getInvites().contains(user.getUuid())) return ChatUtil.sendMessage(player, "&7Ta frakcja nie wysłała ci zaprsozenia.");
         user.setFraction(newFraction);
         newFraction.removeInvite(user.getUuid());
         newFraction.getMembers().add(user.getUuid());
         TagUtil.updateAll();
-        return ChatUtil.sendMessage(player, "&7You have joined &3" + newFraction.getTag() + " &7fraction.");
+        return ChatUtil.sendMessage(player, "&7Dołączyłeś do &3" + newFraction.getTag() + " &7.");
     }
 }

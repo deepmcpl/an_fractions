@@ -20,7 +20,7 @@ public class BaseCommand extends Command {
     private final Set<UUID> teleporting = new HashSet<>();
 
     public BaseCommand() {
-        super("base", "", "/base", new String[0], "");
+        super("baza", "", "/baza", new String[0], "");
     }
 
     @Override
@@ -28,12 +28,12 @@ public class BaseCommand extends Command {
         Player player = (Player) commandSender;
         User user = UserManager.getUser(player.getUniqueId());
         Fraction fraction = user.getFraction();
-        if(fraction == null) return ChatUtil.sendMessage(player, "&7You don't belong to any fraction.");
-        if(teleporting.contains(user.getUuid())) return ChatUtil.sendMessage(player, "&7You are already trying to teleport.");
+        if(fraction == null) return ChatUtil.sendMessage(player, "&7Nie należysz do żadnej frakcji.");
+        if(teleporting.contains(user.getUuid())) return ChatUtil.sendMessage(player, "&7Jesteś już w trakcie teleportacji!");
         Location location = fraction.getCuboid().getBase();
         createTeleportTask(player, location, player.getLocation(), 5);
         teleporting.add(user.getUuid());
-        return ChatUtil.sendMessage(player, "&7You will be teleported in &35 seconds&7.");
+        return ChatUtil.sendMessage(player, "&7Zostaniesz przeteleportowany za &35 sekund&7.");
     }
 
     public void createTeleportTask(Player player, Location location, Location firstLocation, int seconds) {
@@ -44,18 +44,18 @@ public class BaseCommand extends Command {
             }
             if(seconds < 1) {
                 Bukkit.getScheduler().runTask(Fractions.getInstance(), () -> {
-                    ChatUtil.sendMessage(player, "&7You have been teleported to your fraction base.");
+                    ChatUtil.sendMessage(player, "&7Zostałeś przeteleportowany do bazy swojej frakcji.");
                     player.teleport(location);
                     teleporting.remove(player.getUniqueId());
                 });
                 return;
             }
             if(player.getLocation().getBlockX() != firstLocation.getBlockX() || player.getLocation().getBlockZ() != firstLocation.getBlockZ()) {
-                ChatUtil.sendMessage(player, "&7You have moved. Teleportation canceled.");
+                ChatUtil.sendMessage(player, "&7Poruszyłeś się. Teleportacja przerwana.");
                 teleporting.remove(player.getUniqueId());
                 return;
             }
-            ChatUtil.sendMessage(player, "&7You will be teleported in: &3" + seconds + "s");
+            ChatUtil.sendMessage(player, "&7Zostaniesz przeteleportowany za: &3" + seconds + "s");
             createTeleportTask(player, location, firstLocation, seconds-1);
         }, 20L);
     }

@@ -26,8 +26,8 @@ public class PlayerJoinListener implements Listener {
         Fraction fraction = user.getFraction();
         if(fraction == null) return;
         if(fraction.getExpireDate() - System.currentTimeMillis() < 259200000L) {
-            ChatUtil.sendMessage(player, "&7Your fraction is going to expire. (&3" + DateUtil.parse(fraction.getExpireDate()) +")\n" +
-                    "&7Type &3/extend &7to extend time of your fraction for &33 days&7.");
+            ChatUtil.sendMessage(player, "&7Twoja frakcja niedługo wygaśnie. (&3" + DateUtil.parse(fraction.getExpireDate()) +")\n" +
+                    "&7Wpisz &3/przedluz&7, aby przedłużyć ważnosc swojej frakcji na kolejne &33 dni&7.");
         }
     }
 

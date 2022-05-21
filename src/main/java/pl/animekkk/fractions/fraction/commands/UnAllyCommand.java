@@ -13,7 +13,7 @@ import pl.animekkk.fractions.user.util.ChatUtil;
 public class UnAllyCommand extends Command {
 
     public UnAllyCommand() {
-        super("unally", "", "/unally <tag>", new String[0], "");
+        super("zerwijsojusz", "", "/zerwijsojusz <tag>", new String[0], "");
     }
 
     @Override
@@ -21,17 +21,17 @@ public class UnAllyCommand extends Command {
         Player player = (Player) commandSender;
         User user = UserManager.getUser(player.getUniqueId());
         Fraction fraction = user.getFraction();
-        if(fraction == null) return ChatUtil.sendMessage(player, "&7You are not owner of any faction.");
-        if(!fraction.getOwner().equals(user.getUuid())) return ChatUtil.sendMessage(player, "&7You are not owner of this faction.");
-        if(args.length != 1) return ChatUtil.sendMessage(player, "&7Wrong usage. (&3/unally <tag>&7)");
+        if(fraction == null) return ChatUtil.sendMessage(player, "&7Nie należysz do żadnej frakcji.");
+        if(!fraction.getOwner().equals(user.getUuid())) return ChatUtil.sendMessage(player, "&7Nie jesteś właścicielem tej frakcji.");
+        if(args.length != 1) return ChatUtil.sendMessage(player, "&7Złe użycie. (&3/zerwijsojusz <tag>&7)");
         String tag = args[0];
         Fraction ally = FractionManager.getFraction(tag);
-        if(ally == null) return ChatUtil.sendMessage(player, "&7This fraction does not exist.");
-        if(!fraction.isAlly(ally.getTag())) return ChatUtil.sendMessage(player, "&7This fraction is not your ally.");
+        if(ally == null) return ChatUtil.sendMessage(player, "&7Ta frakcja nie istnieje.");
+        if(!fraction.isAlly(ally.getTag())) return ChatUtil.sendMessage(player, "&7Ta frakcja nie jest twoim sojusznikiem.");
         fraction.removeAlly(ally.getTag());
         ally.removeAlly(fraction.getTag());
         TagUtil.updateAll();
-        return ChatUtil.sendMessage(player, "&3" + ally.getTag() + " &7is no longer your ally.");
+        return ChatUtil.sendMessage(player, "&3" + ally.getTag() + " &7 już nie jest twoim sojusznikiem.");
     }
 
 }

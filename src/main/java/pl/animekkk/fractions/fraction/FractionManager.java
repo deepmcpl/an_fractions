@@ -17,7 +17,7 @@ public class FractionManager {
         return fractions.get(name);
     }
 
-    public static boolean exist(String name) {
+    public static boolean isExisting(String name) {
         return fractions.containsKey(name);
     }
 
@@ -36,7 +36,7 @@ public class FractionManager {
         fraction.getMembers().forEach(uuid -> {
             User user = UserManager.getUser(uuid);
             user.setFraction(null);
-            if(user.isOnline()) ChatUtil.sendMessage(user.getPlayer(), "&7Your fraction has been deleted.");
+            if(user.isOnline()) ChatUtil.sendMessage(user.getPlayer(), "&7Twoja frakcja została usunięta.");
         });
         getFractions().forEach(otherFraction -> {
             if(otherFraction.isAlly(fraction.getTag())) otherFraction.removeAlly(fraction.getTag());

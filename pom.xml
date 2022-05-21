@@ -44,8 +44,8 @@
             <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
         <repository>
-            <id>dre-repo</id>
-            <url>http://erethon.de/repo/</url>
+            <id>mikigal-repo</id>
+            <url>https://repo.mikigal.pl/releases</url>
         </repository>
     </repositories>
     <dependencies>
@@ -66,6 +66,12 @@
             <artifactId>spigot</artifactId>
             <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>pl.mikigal</groupId>
+            <artifactId>ConfigAPI</artifactId>
+            <version>1.2.2</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

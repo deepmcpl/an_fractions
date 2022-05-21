@@ -13,7 +13,7 @@ import pl.animekkk.fractions.user.util.ChatUtil;
 public class SetBaseCommand extends Command {
 
     public SetBaseCommand() {
-        super("setbase", "", "/setbase", new String[0], "");
+        super("ustawbaze", "", "/ustawbaze", new String[0], "");
     }
 
     @Override
@@ -21,12 +21,12 @@ public class SetBaseCommand extends Command {
         Player player = (Player) commandSender;
         User user = UserManager.getUser(player.getUniqueId());
         Fraction fraction = user.getFraction();
-        if(fraction == null) return ChatUtil.sendMessage(player, "&7You are not owner of any faction.");
-        if(!fraction.getOwner().equals(user.getUuid())) return ChatUtil.sendMessage(player, "&7You are not owner of this faction.");
+        if(fraction == null) return ChatUtil.sendMessage(player, "&7Nie należysz do żadnej frakcji.");
+        if(!fraction.getOwner().equals(user.getUuid())) return ChatUtil.sendMessage(player, "&7Nie jesteś właścicielem tej frakcji.");
         Location location = player.getLocation().subtract(0, 1, 0);
-        if(location.getBlock().getType() == Material.AIR) return ChatUtil.sendMessage(player, "&7You can't set base on air.");
+        if(location.getBlock().getType() == Material.AIR) return ChatUtil.sendMessage(player, "&7Nie możesz ustawić bazy w powietrzu.");
         location.add(0, 1, 0);
         fraction.getCuboid().setBase(location);
-        return ChatUtil.sendMessage(player, "&7You have set new base for your fraction.");
+        return ChatUtil.sendMessage(player, "&7Ustawiłeś nową bazę dla swojej frakcji.");
     }
 }

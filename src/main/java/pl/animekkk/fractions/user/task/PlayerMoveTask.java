@@ -21,15 +21,15 @@ public class PlayerMoveTask implements Runnable {
             User user = UserManager.getUser(player.getUniqueId());
             Fraction fraction = LocationUtil.getCurrentFraction(player.getLocation());
             if(fraction != null) {
-                if(!fraction.getFractionSetting().hasSetting(FractionSetting.ENTER_CUBOID)
+                if((!fraction.getFractionSetting().hasSetting(FractionSetting.ENTER_CUBOID) && Fractions.getFractionsConfig().getSettingsEnabled())
                         && !fraction.isMember(user.getUuid()) && user.getLastSafeLocation() != null
                         && !player.hasPermission("fractions.cuboidbypass")) {
                     Bukkit.getScheduler().runTask(Fractions.getInstance(), () -> {
                         player.teleport(user.getLastSafeLocation());
-                        ChatUtil.sendActionBar(player, "&7You can't enter this fraction cuboid. (&3" + fraction.getTag() + "&7)");
+                        ChatUtil.sendActionBar(player, "&7Wkroczyłeś na teren frakcji &3" + fraction.getTag() + "&7.");
                     });
                 } else {
-                    ChatUtil.sendActionBar(player, "&7You entered fraction cuboid. &7(&3" + fraction.getTag() + "&7)" +
+                    ChatUtil.sendActionBar(player, "&7Wkroczyłeś na teren frakcji &3" + fraction.getTag() + "&7." +
                             (player.hasPermission("fractions.cuboidbypass") ? " &c[ADMIN]" : ""));
                     seenOnCuboid.add(player.getUniqueId());
                 }

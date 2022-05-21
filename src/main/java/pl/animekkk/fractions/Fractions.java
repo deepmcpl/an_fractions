@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import pl.animekkk.fractions.commands.CommandManager;
 import pl.animekkk.fractions.fraction.Fraction;
 import pl.animekkk.fractions.fraction.FractionManager;
+import pl.animekkk.fractions.fraction.FractionsConfig;
 import pl.animekkk.fractions.fraction.commands.*;
 import pl.animekkk.fractions.fraction.cuboid.Cuboid;
 import pl.animekkk.fractions.fraction.listener.*;
@@ -18,6 +19,7 @@ import pl.animekkk.fractions.user.UserManager;
 import pl.animekkk.fractions.user.listener.PlayerJoinListener;
 import pl.animekkk.fractions.user.listener.PlayerQuitListener;
 import pl.animekkk.fractions.user.task.PlayerMoveTask;
+import pl.mikigal.config.ConfigAPI;
 
 import java.io.File;
 import java.io.IOException;
@@ -28,10 +30,12 @@ import java.util.logging.Level;
 public class Fractions extends JavaPlugin {
 
     private static Fractions instance;
+    private static FractionsConfig fractionsConfig;
 
     @Override
     public void onEnable() {
         instance = this;
+        fractionsConfig = ConfigAPI.init(FractionsConfig.class, this);
 
         File file = new File(getDataFolder().getAbsolutePath());
         if(!file.exists()) file.mkdirs();
@@ -155,16 +159,19 @@ public class Fractions extends JavaPlugin {
     private void registerListeners() {
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(new BlockBreakListener(), this);
-        pluginManager.registerEvents(new BlockFromToListener(), this);
         pluginManager.registerEvents(new BlockPlaceListener(), this);
+        pluginManager.registerEvents(new PlayerJoinListener(), this);
+        pluginManager.registerEvents(new PlayerQuitListener(), this);
+
+        //Listeners for settings
+        if(!getFractionsConfig().getSettingsEnabled()) return;
+        pluginManager.registerEvents(new InventoryCloseListener(), this);
+        pluginManager.registerEvents(new BlockFromToListener(), this);
         pluginManager.registerEvents(new CreatureSpawnListener(), this);
         pluginManager.registerEvents(new EntityDamageByEntityListener(), this);
         pluginManager.registerEvents(new EntityExplodeListener(), this);
         pluginManager.registerEvents(new InventoryClickListener(), this);
-        pluginManager.registerEvents(new InventoryCloseListener(), this);
         pluginManager.registerEvents(new PlayerBucketEmptyListener(), this);
-        pluginManager.registerEvents(new PlayerJoinListener(), this);
-        pluginManager.registerEvents(new PlayerQuitListener(), this);
     }
 
     private void registerCommands() {
@@ -191,6 +198,10 @@ public class Fractions extends JavaPlugin {
 
     public static Fractions getInstance() {
         return instance;
+    }
+
+    public static FractionsConfig getFractionsConfig() {
+        return fractionsConfig;
     }
 
 }
