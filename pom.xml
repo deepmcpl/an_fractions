@@ -47,6 +47,10 @@
             <id>mikigal-repo</id>
             <url>https://repo.mikigal.pl/releases</url>
         </repository>
+        <repository>
+            <id>placeholderapi</id>
+            <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
+        </repository>
     </repositories>
     <dependencies>
         <dependency>
@@ -54,6 +58,7 @@
             <artifactId>paper-api</artifactId>
             <version>1.16.5-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -72,6 +77,12 @@
             <artifactId>ConfigAPI</artifactId>
             <version>1.2.2</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>me.clip</groupId>
+            <artifactId>placeholderapi</artifactId>
+            <version>2.11.1</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

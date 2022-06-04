@@ -11,6 +11,7 @@ import pl.animekkk.fractions.fraction.FractionsConfig;
 import pl.animekkk.fractions.fraction.commands.*;
 import pl.animekkk.fractions.fraction.cuboid.Cuboid;
 import pl.animekkk.fractions.fraction.listener.*;
+import pl.animekkk.fractions.fraction.placeholders.FractionNameExpansion;
 import pl.animekkk.fractions.fraction.setting.FractionSettings;
 import pl.animekkk.fractions.fraction.task.ExpireTask;
 import pl.animekkk.fractions.fraction.task.SaveTask;
@@ -46,6 +47,7 @@ public class Fractions extends JavaPlugin {
         registerListeners();
         registerCommands();
         registerTasks();
+        registerExpansions();
     }
 
     @Override
@@ -194,6 +196,10 @@ public class Fractions extends JavaPlugin {
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, new PlayerMoveTask(), 10L, 10L);
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, new ExpireTask(), 60 * 20L, 60 * 20L);
         Bukkit.getScheduler().runTaskTimerAsynchronously(this, new SaveTask(), 300 * 20L, 300 * 20L);
+    }
+
+    private void registerExpansions() {
+        new FractionNameExpansion().register();
     }
 
     public static Fractions getInstance() {
