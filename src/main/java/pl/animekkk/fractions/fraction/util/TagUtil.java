@@ -64,7 +64,7 @@ public class TagUtil {
 
     private static String getPrefix(User user, String color) {
         if(user.getFraction() == null) return "";
-        return ChatUtil.format(color + user.getFraction().getTag());
+        return ChatUtil.format(color + user.getFraction().getTag() + " ");
     }
 
     private static String getColor(User user, User other) {
