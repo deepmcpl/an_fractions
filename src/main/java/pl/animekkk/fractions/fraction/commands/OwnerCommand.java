@@ -21,7 +21,7 @@ public class OwnerCommand extends Command {
         Fraction fraction = user.getFraction();
         if(fraction == null) return ChatUtil.sendMessage(player, "&7Nie należysz do żadnej frakcji.");
         if(!fraction.getOwner().equals(user.getUuid())) return ChatUtil.sendMessage(player, "&7Nie jesteś właścicielem tej frakcji.");
-        if(args.length < 1) return ChatUtil.sendMessage(player, "&7Złe użycie. (&3/owner <nick>&7)");
+        if(args.length < 1) return ChatUtil.sendMessage(player, "&7Złe użycie. (&3/lider <nick>&7)");
         User newOwner = UserManager.getUserByName(args[0]);
         if(newOwner == null) return ChatUtil.sendMessage(player, "&7Ten gracz nie istnieje.");
         if(args.length < 2) return ChatUtil.sendMessage(player, "&7Aby to potwierdzić, wpisz: &3/lider " + newOwner.getName() + " potwierdz");

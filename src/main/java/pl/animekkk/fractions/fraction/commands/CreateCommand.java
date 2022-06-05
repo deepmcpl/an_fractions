@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 public class CreateCommand extends Command {
 
     public CreateCommand() {
-        super("stworz", "", "/stworz <tag> <nazwa>", new String[0], "");
+        super("stworz", "", "/stworz <tag> <nazwa>", new String[] {"zaloz"}, "");
     }
 
     @Override
